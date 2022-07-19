@@ -11,3 +11,11 @@ function operate(symbol, num1, num2) {
     alert('Check equation');
 }
 
+const display = document.querySelector('.display');
+let btns = document.getElementsByClassName('number');
+
+for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function(e) {
+        display.textContent = e.target.textContent;
+    })
+}

@@ -33,7 +33,11 @@ body {
 }
 
 .display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     background-color: antiquewhite;
+    font-size: 70px;
     height: 100px;
     width: 250px;
     border-radius: 10px;
