@@ -20,6 +20,8 @@ const nums = document.getElementsByClassName('number');
 const ops = document.getElementsByClassName('symbol');
 const clear = document.querySelector('.clear');
 const equal = document.querySelector('.equal');
+const del = document.querySelector('.delete');
+    
 
 let inputs = [];
 display.textContent = 0;
@@ -35,8 +37,7 @@ for (let i = 0; i < nums.length; i++) {
         } else if (typeof parseInt(inputs[inputs.length-1]) == 'number') {
             let newValue = inputs[inputs.length-1] + e.target.textContent;
             inputs.splice(inputs.length-1, 1, newValue);
-            display.textContent = inputs[inputs.length-1];
-            console.log(inputs)
+            display.textContent = inputs[inputs.length-1].toString();
         }
     })
 }
@@ -47,24 +48,31 @@ for (let i = 0; i < ops.length; i++) {
            let newResult =  operate(inputs[1], inputs[0], inputs[2]);
            inputs = [newResult];
            inputs.push(e.target.textContent);
-           display.textContent = newResult;
+           display.textContent = newResult.toString();
         } else if (inputs.length < 2 && 
             typeof parseInt(inputs[inputs.length-1]) == 'number') {
             inputs.push(e.target.textContent);
-            console.log(inputs)
         }
-    })
+    })  
 }
 
 clear.addEventListener('click', function() {
     inputs = [];
-    display.textContent = 0;
+    display.textContent = '0';
 })
 
 equal.addEventListener('click', function() {
     if (inputs.length == 3) {
         let newResult =  operate(inputs[1], inputs[0], inputs[2]);
         inputs = [newResult];
-        display.textContent = newResult;
+        display.textContent = newResult.toString();
+    }
+})
+
+del.addEventListener('click', function() {
+    if (/[0-9]/.test(display.textContent) == true) {
+        let newNum = display.textContent.slice(0, -1);
+        display.textContent = newNum;
+        inputs[inputs.length-1] = newNum;
     }
 })
