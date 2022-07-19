@@ -12,10 +12,19 @@ function operate(symbol, num1, num2) {
 }
 
 const display = document.querySelector('.display');
-let btns = document.getElementsByClassName('number');
+let nums = document.getElementsByClassName('number');
 
-for (let i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('click', function(e) {
-        display.textContent = e.target.textContent;
+let inputs = [];
+
+for (let i = 0; i < nums.length; i++) {
+    nums[i].addEventListener('click', function(e) {
+        if (inputs.length < 1) {
+            display.textContent = e.target.textContent;
+            inputs.push(e.target.textContent);
+        } else {
+            let newValue = inputs[0] + e.target.textContent;
+            inputs.splice(0, 1, newValue);
+            display.textContent = inputs[0];
+        }
     })
 }
