@@ -49,7 +49,7 @@ body {
     gap: 10px;
 }
 
-.number {
+.number, .symbol, .equal {
     height: 50px;
     width: 50px;
     font-size: 25px;
