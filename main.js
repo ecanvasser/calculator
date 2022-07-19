@@ -19,6 +19,7 @@ const display = document.querySelector('.display');
 const nums = document.getElementsByClassName('number');
 const ops = document.getElementsByClassName('symbol');
 const clear = document.querySelector('.clear');
+const equal = document.querySelector('.equal');
 
 let inputs = [];
 display.textContent = 0;
@@ -58,4 +59,12 @@ for (let i = 0; i < ops.length; i++) {
 clear.addEventListener('click', function() {
     inputs = [];
     display.textContent = 0;
+})
+
+equal.addEventListener('click', function() {
+    if (inputs.length == 3) {
+        let newResult =  operate(inputs[1], inputs[0], inputs[2]);
+        inputs = [newResult];
+        display.textContent = newResult;
+    }
 })
