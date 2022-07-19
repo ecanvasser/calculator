@@ -8,7 +8,7 @@ function operate(symbol, num1, num2) {
         return add(num1, num2)
     } else if (symbol == '-') {
         return subtract(num1, num2)
-    } else if (symbol == '*') {
+    } else if (symbol == 'x') {
         return multiply(num1, num2)
     } else if (symbol == '÷') {
         return divide(num1, num2)
@@ -16,10 +16,12 @@ function operate(symbol, num1, num2) {
 }
 
 const display = document.querySelector('.display');
-let nums = document.getElementsByClassName('number');
-let ops = document.getElementsByClassName('symbol');
+const nums = document.getElementsByClassName('number');
+const ops = document.getElementsByClassName('symbol');
+const clear = document.querySelector('.clear');
 
 let inputs = [];
+display.textContent = 0;
 
 for (let i = 0; i < nums.length; i++) {
     nums[i].addEventListener('click', function(e) {
@@ -28,8 +30,8 @@ for (let i = 0; i < nums.length; i++) {
             inputs.push(e.target.textContent);
         } else if (inputs.length == 2) {
             inputs.push(e.target.textContent)
-        } else if (inputs.length > 0 && 
-            typeof parseInt(inputs[inputs.length-1]) == 'number') {
+            display.textContent = e.target.textContent;
+        } else if (typeof parseInt(inputs[inputs.length-1]) == 'number') {
             let newValue = inputs[inputs.length-1] + e.target.textContent;
             inputs.splice(inputs.length-1, 1, newValue);
             display.textContent = inputs[inputs.length-1];
@@ -42,13 +44,18 @@ for (let i = 0; i < ops.length; i++) {
     ops[i].addEventListener('click', function(e) {
         if (inputs.length == 3) {
            let newResult =  operate(inputs[1], inputs[0], inputs[2]);
-           inputs.splice(0, 3, newResult);
+           inputs = [newResult];
            inputs.push(e.target.textContent);
            display.textContent = newResult;
-        } else if (inputs.length < 3 && 
+        } else if (inputs.length < 2 && 
             typeof parseInt(inputs[inputs.length-1]) == 'number') {
             inputs.push(e.target.textContent);
             console.log(inputs)
         }
     })
 }
+
+clear.addEventListener('click', function() {
+    inputs = [];
+    display.textContent = 0;
+})
