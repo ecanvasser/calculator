@@ -1,7 +1,7 @@
-const add = (a, b) => parseFloat(a) + parseFloat(b);
-const subtract = (a, b) => parseFloat(a) - parseFloat(b);
-const multiply = (a, b) => parseFloat(a) * parseFloat(b);
-const divide = (a, b) => parseFloat(a) / parseFloat(b);
+const add = (a, b) => (parseFloat(a) + parseFloat(b)).toFixed(3);
+const subtract = (a, b) => (parseFloat(a) - parseFloat(b)).toFixed(3);
+const multiply = (a, b) => (parseFloat(a) * parseFloat(b)).toFixed(3);
+const divide = (a, b) => (parseFloat(a) / parseFloat(b)).toFixed(3);
 
 function operate(symbol, num1, num2) {
     if (symbol == '+') {
